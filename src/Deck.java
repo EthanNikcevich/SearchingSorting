@@ -1,4 +1,3 @@
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Collections;
@@ -135,54 +134,39 @@ public class Deck {
         }
     }
 
-
-//    public static ArrayList<Card> leftHalf(ArrayList<Card> array) {
-//        int size = array.size()/2;
-//        ArrayList<Card> left = new ArrayList<>(size);
-//        for (int i = 0; i < size; i++) {
-//            left.get(i) = array.get(i);
-//        }
-//        return left;
-//    }
-//    public static ArrayList<Card> rightHalf(Card[] array) {
-//        int size = array.length / 2;
-//        int sizeB = array.length - size;
-//        Card[] right = new Card[sizeB];
-//        for (int i = 0; i <= sizeB - 1; i++) {
-//            right[i] = array[i - 1 + sizeB];
-//        }
-//        return right;
-//    }
-
-//    public void binarySearchHand(int suit, int face){
-//        binarySearch(hand, suit, face);
-//    }
-//
     public void binarySearch(int suit, int face){
         binarySearch2(hand,suit,face);
     }
 
     public void binarySearch2(ArrayList<Card> hand, int suit, int face){
-        if(suit==hand.get(hand.size()/2).suit && face==hand.get(hand.size()/2).value){
-            System.out.println("Found: " + hand.get(hand.size()/2).name);
+        if(face==hand.get(hand.size()/2).value){
+            int n=0;
+            for(int i=0; i<hand.size(); i++){
+                if(face==hand.get(i).value&&suit==hand.get(i).suit){
+                    System.out.println("Found: " + hand.get(i).name);
+                    n=1;
+                }
+            }
+            if(n==0){
+                System.out.println("That card isn't in your hand");
+            }
         }
-        else if(suit<hand.get(hand.size()/2).suit || face<hand.get(hand.size()/2).value){
+        else if(hand.size()==1){
+            System.out.println("That card isn't in your hand");
+        }
+        else if(face<hand.get(hand.size()/2).value){
             ArrayList<Card> leftHalf = new ArrayList<Card>();
-            System.out.println(hand.size());
-            for(int i=0; i<=hand.size()/2; i++){
+            for(int i=0; i<hand.size()/2; i++){
                 leftHalf.add(hand.get(i));
             }
             binarySearch2(leftHalf,suit,face);
         }
-        else if(suit>hand.get(hand.size()/2).suit || face>hand.get(hand.size()/2).value){
+        else if(face>hand.get(hand.size()/2).value){
             ArrayList<Card> rightHalf = new ArrayList<Card>();
-            for(int i=hand.size()/2; i<=hand.size(); i++){
+            for(int i=hand.size()/2; i<hand.size(); i++){
                 rightHalf.add(hand.get(i));
             }
             binarySearch2(rightHalf,suit,face);
-        }
-        else if(hand.size()==1){
-            System.out.println("That card isn't in your hand");
         }
     }
 }

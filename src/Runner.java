@@ -3,11 +3,11 @@ public class Runner {
         Deck d = new Deck(true);
         d.shuffleDeck();
         d.dealHand(7);
-        d.bubbleSortHand();
+        //  d.bubbleSortHand();
         //d.selectionSortHand();
-        //d.mergeSortHand(d.getList());
-        //d.listHand();
-        d.binarySearch(2,3);
+        d.mergeSortHand(d.getList());
+        d.listHand();
+        d.binarySearch(2,9);
     }
 }
 
